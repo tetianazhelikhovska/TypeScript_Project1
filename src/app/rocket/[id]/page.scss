@@ -1,0 +1,208 @@
+.rocket-page {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+
+  .back-link {
+    display: inline-block;
+    margin-bottom: 1.5rem;
+    color: var(--text-muted);
+    font-size: 0.875rem;
+    text-decoration: none;
+    &:hover { color: var(--text); }
+  }
+
+  .rocket-header {
+    margin-bottom: 2.5rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--border);
+
+    > div:first-child {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1rem;
+
+      h1 { margin: 0; font-size: 1.75rem; }
+
+      span {
+        padding: 0.3rem 0.875rem;
+        border-radius: 2rem;
+        font-size: 0.75rem;
+        font-weight: 600;
+
+        &.active {
+          background: var(--success-bg);
+          color: var(--success);
+        }
+        &.inactive {
+          background: var(--failure-bg);
+          color: var(--failure);
+        }
+      }
+    }
+
+    > p {
+      max-width: 800px;
+      margin-bottom: 2rem;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      line-height: 1.7;
+    }
+
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+
+      > div {
+        display: flex;
+        flex-direction: column;
+        gap: 0.2rem;
+
+        span {
+          font-size: 0.7rem;
+          text-transform: uppercase;
+          color: var(--text-muted);
+          letter-spacing: 0.04em;
+        }
+
+        strong {
+          font-size: 0.95rem;
+          color: var(--text);
+        }
+      }
+    }
+  }
+
+  .gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 0.75rem;
+    margin-bottom: 2.5rem;
+
+    > div {
+      position: relative;
+      aspect-ratio: 16 / 9;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      background: var(--bg-card);
+
+      img { object-fit: cover; }
+    }
+  }
+
+  section {
+    margin-bottom: 2.5rem;
+
+    h2 {
+      font-size: 1rem;
+      margin-bottom: 1.25rem;
+      padding-left: 0.75rem;
+      border-left: 2px solid var(--accent);
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1rem;
+
+      > div {
+        padding: 1.25rem;
+        background: var(--bg-card);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-md);
+        display: flex;
+        flex-direction: column;
+        gap: 0.25rem;
+
+        span:first-child {
+          display: block;
+          font-size: 0.7rem;
+          text-transform: uppercase;
+          color: var(--text-muted);
+          letter-spacing: 0.04em;
+        }
+
+        span:not(:first-child) {
+          font-size: 0.95rem;
+          color: var(--text);
+          font-weight: 500;
+        }
+      }
+    }
+
+    .stages {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+
+      > div {
+        padding: 1.5rem;
+        background: var(--bg-card);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-md);
+
+        h3 {
+          margin: 0 0 1.25rem 0;
+          padding-bottom: 0.75rem;
+          border-bottom: 1px solid var(--border);
+          font-size: 1rem;
+        }
+
+        > div {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin-bottom: 0.625rem;
+          font-size: 0.875rem;
+
+          span { color: var(--text-muted); }
+          strong { color: var(--text); }
+        }
+      }
+    }
+
+    .payloads {
+      display: grid;
+      gap: 0.625rem;
+
+      > div {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.875rem 1.25rem;
+        background: var(--bg-card);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-md);
+        font-size: 0.875rem;
+
+        span:first-child { color: var(--text-muted); }
+        span:last-child { color: var(--text); font-weight: 500; }
+      }
+    }
+  }
+
+  .wiki-link {
+    display: inline-block;
+    padding: 0.625rem 1.25rem;
+    border-radius: var(--radius-sm);
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    color: var(--text);
+    font-size: 0.875rem;
+    text-decoration: none;
+    transition: border-color 0.2s, color 0.2s;
+
+    &:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+  }
+
+  .green { color: var(--success); }
+  .red   { color: var(--failure); }
+}

@@ -1,0 +1,106 @@
+.launch-card-link {
+  display: block;
+  text-decoration: none;
+}
+
+.launch-card {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.875rem 1.25rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  transition: background 0.2s, border-color 0.2s;
+
+  &:hover {
+    background: var(--bg-card-hover);
+    border-color: var(--border-light);
+  }
+}
+
+.launch-card__image {
+  width: 48px;
+  height: 48px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+}
+
+.launch-card__image-placeholder {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #0f1420 0%, #1a2035 100%);
+  border-radius: var(--radius-sm);
+  color: #2a3a6a;
+}
+
+.launch-card__header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  width: 130px;
+  flex-shrink: 0;
+}
+
+.launch-card__status {
+  display: inline-block;
+  padding: 0.2rem 0.6rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.75rem;
+  font-weight: 500;
+  white-space: nowrap;
+  background: var(--success-bg);
+  color: var(--success);
+
+  .launch-card--failure & {
+    background: var(--failure-bg);
+    color: var(--failure);
+  }
+}
+
+.launch-card__rocket {
+  margin: 0;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.launch-card__body {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  min-width: 0;
+}
+
+.launch-card__date {
+  margin: 0;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.launch-card__title {
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
