@@ -22,6 +22,10 @@ export default async function RocketPage({ params }: Props) {
   const { id } = await params;
   const rocket = await getRocket(id);
 
+if (!rocket) {
+  return <div>Rocket not found</div>;
+}
+
   return (
     <div className="rocket-page">
 
