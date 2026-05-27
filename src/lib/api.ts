@@ -1,112 +1,108 @@
-import { Launch } from "../types"; 
-import { Rocket } from "../types"; 
+import { Launch } from "../types";
+import { Rocket } from "../types";
 import { Crew } from "../types";
 
+const safeFetch = async (url: string, options?: RequestInit) => {
+  try {
+    const res = await fetch(url, options);
+    if (!res.ok) return null;
+    return await res.json();
+  } catch (e) {
+    return null;
+  }
+};
+
 export const getLaunches = async (): Promise<Launch[]> => {
-  const res = await fetch('https://api.spacexdata.com/v4/launches/query', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      query: {},
-      options: {
-        populate: [
-          {
-            path: 'rocket',
-            select: {
-              name: 1,
-              id: 1,
-            }
-          }
-        ],
-        pagination: false,
-      }
-    }),
-    next: { revalidate: 86400 },
-  });
-  if (!res.ok) {
-     throw new Error('Failed to fetch launches');
-  }
-  const data = await res.json();
-  return data.docs;
-}
-
-export const getLaunch = async (id: string): Promise<Launch> => {
-  const res = await fetch('https://api.spacexdata.com/v4/launches/query', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      query: {
-        _id: id,
+  const data = await safeFetch(
+    "https://api.spacexdata.com/v4/launches/query",
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
       },
-      options: {
-        populate: [
-          {
-            path: 'rocket',
-            select: {
-              name: 1,
-              id: 1,
-            }
-          }
-        ],
-      }
-    }),
-    next: { revalidate: 86400 },
-  });
+      body: JSON.stringify({
+        query: {},
+        options: {
+          populate: [
+            {
+              path: "rocket",
+              select: {
+                name: 1,
+                id: 1,
+              },
+            },
+          ],
+          pagination: false,
+        },
+      }),
+    }
+  );
 
-  if (!res.ok) {
-    throw new Error('Failed to fetch launch');
-  }
+  return data?.docs || [];
+};
 
-  const data = await res.json();
-  return data.docs[0];
+export const getLaunch = async (id: string): Promise<Launch | null> => {
+  const data = await safeFetch(
+    "https://api.spacexdata.com/v4/launches/query",
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        query: {
+          _id: id,
+        },
+        options: {
+          populate: [
+            {
+              path: "rocket",
+              select: {
+                name: 1,
+                id: 1,
+              },
+            },
+          ],
+        },
+      }),
+    }
+  );
+
+  return data?.docs?.[0] || null;
 };
 
 export const getRockets = async (): Promise<Rocket[]> => {
-  const res = await fetch('https://api.spacexdata.com/v4/rockets', {
-    next: { revalidate: 86400 },
-  });
-  if (!res.ok) {
-     throw new Error('Failed to fetch rockets');
-  }
-  return res.json();
-}
+  const data = await safeFetch(
+    "https://api.spacexdata.com/v4/rockets"
+  );
 
-export const getRocket = async (id: string): Promise<Rocket> => {
-  const url = `https://api.spacexdata.com/v4/rockets/${id}`;
-  const res = await fetch(url, {
-    next: { revalidate: 86400 },
-  });
+  return data || [];
+};
 
-  if (!res.ok) {
-    throw new Error('Failed to fetch rocket');
-  }
+export const getRocket = async (
+  id: string
+): Promise<Rocket | null> => {
+  const data = await safeFetch(
+    `https://api.spacexdata.com/v4/rockets/${id}`
+  );
 
-  return res.json();
+  return data || null;
 };
 
 export const getCrew = async (): Promise<Crew[]> => {
-  const res = await fetch('https://api.spacexdata.com/v4/crew', {
-    next: { revalidate: 86400 },
-  });
-  if (!res.ok) {
-     throw new Error('Failed to fetch crew');
-  }
-  return res.json();
-}
+  const data = await safeFetch(
+    "https://api.spacexdata.com/v4/crew"
+  );
 
-export const getCrewMember = async (id: string): Promise<Crew> => {
-  const url = `https://api.spacexdata.com/v4/crew/${id}`;
-  const res = await fetch(url, {
-    next: { revalidate: 86400 },
-  });
+  return data || [];
+};
 
-  if (!res.ok) {
-    throw new Error('Failed to fetch crew');
-  }
+export const getCrewMember = async (
+  id: string
+): Promise<Crew | null> => {
+  const data = await safeFetch(
+    `https://api.spacexdata.com/v4/crew/${id}`
+  );
 
-  return res.json();
+  return data || null;
 };
