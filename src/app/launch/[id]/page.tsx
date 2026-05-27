@@ -1,4 +1,4 @@
-import { getLaunch, getRockets } from "../../../lib/api";
+import { getLaunch } from "../../../lib/api";
 import Image from "next/image";
 import { format } from "date-fns";
 import Link from "next/link";
@@ -23,6 +23,11 @@ export default async function LaunchPage({ params }: Props) {
   const { id } = await params;
 
   const launch = await getLaunch(id);
+
+  // ✅ FIX: захист від null (ВАЖЛИВО для GitHub Pages)
+  if (!launch) {
+    return <div>Launch not found</div>;
+  }
 
   const rocketName =
     typeof launch.rocket === "string"
@@ -73,7 +78,6 @@ export default async function LaunchPage({ params }: Props) {
 
           <div className="flight-info">
             <span className="flight-info__label">Flight Number</span>
-
             <span className="flight-info__number">
               #{launch.flight_number}
             </span>
@@ -94,9 +98,7 @@ export default async function LaunchPage({ params }: Props) {
 
           {launch.links.youtube_id && (
             <section className="launch-section">
-              <h2 className="launch-section__title">
-                Webcast
-              </h2>
+              <h2 className="launch-section__title">Webcast</h2>
 
               <div className="video-container">
                 <iframe
@@ -124,7 +126,6 @@ export default async function LaunchPage({ params }: Props) {
                       <span className="core-stat__label">
                         Serial
                       </span>
-
                       <span className="core-stat__value">
                         {core.core || "N/A"}
                       </span>
@@ -134,7 +135,6 @@ export default async function LaunchPage({ params }: Props) {
                       <span className="core-stat__label">
                         Flight #
                       </span>
-
                       <span className="core-stat__value">
                         {core.flight}
                       </span>
